@@ -25,7 +25,7 @@ class Engine {
         File file = new File(path.toUri());
         try (Scanner scan = new Scanner(file)) {
             while(scan.hasNextLine()) {
-                source.add(scan.nextLine().split("\\s+"));
+                source.add(scan.nextLine().trim().split("\\s+"));
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -85,7 +85,7 @@ class Engine {
         ArrayList<String> resultOfSearch = new ArrayList<>();
         for (String[] person : source) {
             for (String per : person) {
-                if (per.toLowerCase().contains(data.toLowerCase())) {
+                if (per.equalsIgnoreCase(data.trim())) {
                     resultOfSearch.add(Arrays.toString(person).replaceAll("[\\[\\],]", ""));
                     break;
                 }
@@ -94,7 +94,7 @@ class Engine {
         if (resultOfSearch.size() ==0) {
             System.out.println("No matching people found.");
         } else {
-            /*System.out.println("Found people:");*/
+            System.out.printf("%d persons found:%n", resultOfSearch.size());
             resultOfSearch.forEach(System.out::println);
         }
         System.out.println();
