@@ -1,9 +1,6 @@
 package search;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 class StrategyAll implements SearchStrategy{
 
@@ -19,7 +16,9 @@ class StrategyAll implements SearchStrategy{
             System.out.println("No matching people found.");
         } else {
             System.out.printf("%d persons found:%n", resultOfSearch.size());
-            resultOfSearch.forEach(System.out::println);
+            List<String> reversedResult = new ArrayList<>(resultOfSearch);
+            Collections.reverse(reversedResult);
+            reversedResult.forEach(System.out::println);
         }
         System.out.println();
     }
