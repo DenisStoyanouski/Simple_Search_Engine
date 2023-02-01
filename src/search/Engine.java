@@ -30,23 +30,6 @@ class Engine {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        /*int numberOfPeople = 0;
-
-        while (numberOfPeople == 0) {
-            System.out.println("Enter the number of people:");
-            try {
-                numberOfPeople = Integer.parseInt(input());
-            } catch (NumberFormatException e) {
-                System.out.println("Try again");
-            }
-        }
-
-        System.out.println("Enter all people:");
-        while (numberOfPeople != 0) {
-            String[] person = input().split("\\s+");
-            source.add(person);
-            numberOfPeople--;
-        }*/
         System.out.println();
         printMenu();
     }
