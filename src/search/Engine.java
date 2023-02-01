@@ -1,5 +1,9 @@
 package search;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -12,12 +16,21 @@ class Engine {
 
     private static String word;
 
-    public static void start() {
-        enterData();
+    public static void start(String fileName) {
+        loadData(fileName);
     }
 
-    private static void enterData() {
-        int numberOfPeople = 0;
+    private static void loadData(String fileName) {
+        Path path = Paths.get(fileName);
+        File file = new File(path.toUri());
+        try (Scanner scan = new Scanner(file)) {
+            while(scan.hasNextLine()) {
+                source.add(scan.nextLine().split("\\s+"));
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        /*int numberOfPeople = 0;
 
         while (numberOfPeople == 0) {
             System.out.println("Enter the number of people:");
@@ -33,7 +46,7 @@ class Engine {
             String[] person = input().split("\\s+");
             source.add(person);
             numberOfPeople--;
-        }
+        }*/
         System.out.println();
         printMenu();
     }
@@ -98,7 +111,7 @@ class Engine {
         if (resultOfSearch.size() ==0) {
             System.out.println("No matching people found.");
         } else {
-            System.out.println("Found people:");
+            /*System.out.println("Found people:");*/
             resultOfSearch.forEach(System.out::println);
         }
         System.out.println();
