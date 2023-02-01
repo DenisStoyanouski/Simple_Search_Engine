@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Scanner;
 
 class Engine {
@@ -44,7 +43,7 @@ class Engine {
                     "0. Exit");
             menuItem = input().trim();
             switch (menuItem) {
-                case "1" : enterQuery();
+                case "1" : getSearch();
                     break;
                 case "2" : printAllPeople();
                     break;
@@ -59,45 +58,23 @@ class Engine {
         }
     }
 
-    private static void enterQuery() {
-        int numberOfSearch = 1;
-        String data;
-        /*while (numberOfSearch == 0) {
-            System.out.println("Enter the number of search queries:");
-            try {
-                numberOfSearch = Integer.parseInt(input());
-            } catch (NumberFormatException e) {
-                System.out.println("Try again");
-            }
-        }*/
-        System.out.println();
+    private static void getSearch() {
+        System.out.println("Select a matching strategy: ALL, ANY, NONE");
+        String matchingStrategy = input();
+        if (matchingStrategy.equals("ALL")) {
+            Searcher searcher = new Searcher();
+            searcher.doTask(new StrategyAll(), source);
+        }
+        if (matchingStrategy.equals("ANY")) {
+            Searcher searcher = new Searcher();
+            searcher.doTask(new StrategyAny(), source);
+        }
+        if (matchingStrategy.equals("NONE")) {
+            Searcher searcher = new Searcher();
+            searcher.doTask(new StrategyNone(), source);
+        }
 
-        while (numberOfSearch != 0) {
-            System.out.println("Enter a name or email to search all suitable people.");
-            data = input();
-            System.out.println();
-            getSearch(data);
-            numberOfSearch--;
-        }
-    }
 
-    private static void getSearch(String data) {
-        ArrayList<String> resultOfSearch = new ArrayList<>();
-        for (String[] person : source) {
-            for (String per : person) {
-                if (per.equalsIgnoreCase(data.trim())) {
-                    resultOfSearch.add(Arrays.toString(person).replaceAll("[\\[\\],]", ""));
-                    break;
-                }
-            }
-        }
-        if (resultOfSearch.size() ==0) {
-            System.out.println("No matching people found.");
-        } else {
-            System.out.printf("%d persons found:%n", resultOfSearch.size());
-            resultOfSearch.forEach(System.out::println);
-        }
-        System.out.println();
     }
 
     private static void printAllPeople() {
@@ -107,19 +84,6 @@ class Engine {
 
     private static String input(){
         return scanner.nextLine();
-    }
-
-    private static int getIndex(String[] source, String word) {
-        for (int i = 0; i < source.length; i++) {
-            if (Objects.equals(source[i], word)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private static void print(int number){
-        System.out.println(number > -1 ? number + 1 : "Not Found");
     }
 
 }
