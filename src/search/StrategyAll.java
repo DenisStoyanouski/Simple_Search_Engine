@@ -2,16 +2,17 @@ package search;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 class StrategyAll implements SearchStrategy{
 
     @Override
     public void doSearch(ArrayList<String[]> source, String[] data) {
-        ArrayList<String> resultOfSearch = new ArrayList<>();
+        Set<String> resultOfSearch = new HashSet<>();
         for (String[] person : source) {
-            if (Arrays.stream(person).allMatch(Arrays.asList(data)::contains)) {
+            if (new HashSet<>(Arrays.asList(person)).containsAll(Arrays.asList(data))) {
                 resultOfSearch.add(Arrays.toString(person).replaceAll("[\\[\\],]", ""));
-                break;
             }
         }
         if (resultOfSearch.size() ==0) {

@@ -1,13 +1,11 @@
 package search;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 class StrategyNone implements SearchStrategy{
     @Override
     public void doSearch(ArrayList<String[]> source, String[] data) {
-        ArrayList<String> resultOfSearch = new ArrayList<>();
+        Set<String> resultOfSearch = new HashSet<>();
         for (String[] person : source) {
             if (Arrays.stream(person).noneMatch(Arrays.asList(data)::contains)) {
                 resultOfSearch.add(Arrays.toString(person).replaceAll("[\\[\\],]", ""));
