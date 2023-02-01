@@ -1,7 +1,6 @@
 package search;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 class StrategyNone implements SearchStrategy{
     @Override

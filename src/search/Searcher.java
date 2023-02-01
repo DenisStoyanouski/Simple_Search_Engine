@@ -7,7 +7,7 @@ class Searcher {
     private SearchStrategy strategy;
     private String[] data;
 
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public void doTask(SearchStrategy strategy, ArrayList<String[]> source) {
         setStrategy(strategy);

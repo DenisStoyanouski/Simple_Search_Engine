@@ -11,9 +11,7 @@ import java.util.Scanner;
 class Engine {
     private final static Scanner scanner = new Scanner(System.in);
 
-    private static ArrayList<String[]> source = new ArrayList<>();
-
-    private static String word;
+    private static final ArrayList<String[]> source = new ArrayList<>();
 
     public static void start(String fileName) {
         loadData(fileName);
@@ -79,7 +77,7 @@ class Engine {
 
     private static void printAllPeople() {
         System.out.println("=== List of people ===");
-        source.stream().forEach(x-> System.out.println(Arrays.toString(x).replaceAll("[\\[\\],]", "")));
+        source.forEach(x-> System.out.println(Arrays.toString(x).replaceAll("[\\[\\],]", "")));
     }
 
     private static String input(){
